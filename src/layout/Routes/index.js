@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
@@ -6,7 +7,8 @@ import PublicRoute from './PublicRoute';
 import Dashboard from '../../pages/Dashboard';
 import Tickets from '../../pages/Tickets';
 import Students from '../../pages/Students';
-import Staff from '../../pages/Staff';
+import StaffList from '../../pages/Staff/StaffList';
+import StaffView from '../../pages/Staff/StaffView';
 import Settings from '../../pages/Settings';
 import MyProfile from '../../pages/MyProfile';
 import Login from '../../pages/Login';
@@ -15,7 +17,7 @@ const Routes = () => {
     const routes = [
         {
             component: Login,
-            path: '/login',
+            path: '/',
             exact: true
         }
     ];
@@ -23,7 +25,7 @@ const Routes = () => {
     const privateRoutes = [
         {
             component: Dashboard,
-            path: '/',
+            path: '/dashboard',
             exact: true
         },
         {
@@ -37,7 +39,7 @@ const Routes = () => {
             exact: true
         },
         {
-            component: Staff,
+            component: StaffList,
             path: '/staff',
             exact: true
         },
@@ -50,16 +52,21 @@ const Routes = () => {
             component: MyProfile,
             path: '/profilul-meu',
             exact: true
+        },
+        {
+            component: StaffView,
+            path: '/staff/view/:id',
+            exact: true
         }
     ];
 
     return (
         <>
-            {routes.map(({ path, component, exact }) => {
-                return <PublicRoute key={path} path={path} component={component} exact={exact} />;
-            })}
             {privateRoutes.map(({ path, component, exact }) => {
                 return <PrivateRoute key={path} path={path} component={component} exact={exact} />;
+            })}
+            {routes.map(({ path, component, exact }) => {
+                return <PublicRoute key={path} path={path} component={component} exact={exact} />;
             })}
         </>
     );

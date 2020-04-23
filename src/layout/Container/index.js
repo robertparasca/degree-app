@@ -7,9 +7,9 @@ import Header from '../Header';
 const { Content } = Layout;
 
 const Container = (props) => {
-    const { user } = useSelector((state) => state.authSlice);
+    const { isUserLoggedIn } = useSelector((state) => state.authSlice);
 
-    if (!user) {
+    if (!isUserLoggedIn) {
         return props.children;
     }
 

@@ -12,7 +12,7 @@ const Sidebar = () => {
     const menuItems = [
         {
             name: 'Acasa',
-            path: '/',
+            path: '/dashboard',
             exact: true
         },
         {

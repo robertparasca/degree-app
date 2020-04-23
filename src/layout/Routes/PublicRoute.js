@@ -2,18 +2,14 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 
-import { hasToken } from '../../utils/localStorageHelpers';
-
 const PublicRoute = ({ component: Component, ...rest }) => {
-    const { user } = useSelector((state) => state.authSlice);
-
-    const canSee = hasToken() && user;
+    const { isUserLoggedIn } = useSelector((state) => state.authSlice);
 
     return (
         <Route
             {...rest}
             render={(props) => {
-                return canSee ? <Redirect to='/' /> : <Component {...props} key={props.path} />;
+                return isUserLoggedIn ? <Redirect to='/dashboard' /> : <Component {...props} key={props.path} />;
             }}
         />
     );

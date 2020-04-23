@@ -2,12 +2,16 @@ import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 
 import authSlice from './Auth';
+import settingsSlice from './Settings';
+import staffSlice from './Staff';
 
 const createRootReducer = (history) => {
     const appReducer = combineReducers({
         state: (state = {}) => state,
         router: connectRouter(history),
-        authSlice
+        authSlice,
+        settingsSlice,
+        staffSlice
     });
 
     const rootReducer = (state, action) => {
