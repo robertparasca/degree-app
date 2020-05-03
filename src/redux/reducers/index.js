@@ -5,6 +5,7 @@ import authSlice from './Auth';
 import settingsSlice from './Settings';
 import staffSlice from './Staff';
 import studentsSlice from './Students';
+import ticketsSlice from './Tickets';
 
 const createRootReducer = (history) => {
     const appReducer = combineReducers({
@@ -13,7 +14,8 @@ const createRootReducer = (history) => {
         authSlice,
         settingsSlice,
         staffSlice,
-        studentsSlice
+        studentsSlice,
+        ticketsSlice
     });
 
     const rootReducer = (state, action) => {

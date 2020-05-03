@@ -1,27 +1,25 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { push } from 'connected-react-router';
 import { PageHeader } from 'antd';
 
 import Spinner from '../../components/Spinner';
 
 import { fetchStudent, clearState } from '../../redux/reducers/Students/studentView';
-import { getStaffIdFromRoute } from '../../utils/pagesHelpers';
 
 const StudentView = () => {
-    const history = useHistory();
+    const { id } = useParams();
     const dispatch = useDispatch();
     const { loading, student } = useSelector((state) => state.studentsSlice.studentView);
-    const router = useSelector((state) => state.router);
 
     useEffect(() => {
-        const staffId = getStaffIdFromRoute(router);
-        dispatch(fetchStudent(staffId));
+        dispatch(fetchStudent(id));
 
         return () => dispatch(clearState());
-    }, []);
+    }, [id, dispatch]);
 
-    const onBack = () => history.push('/studenti');
+    const onBack = () => dispatch(push('/studenti'));
 
     if (loading) {
         return <Spinner />;

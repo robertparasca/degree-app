@@ -9,5 +9,7 @@ export default {
     roles: {
         STAFF: 'staff',
         STUDENT: 'student'
-    }
+    },
+    dateFormat: 'YYYY-MM-DD HH:mm:ss',
+    dateFormatWithoutHours: 'YYYY-MM-DD'
 };

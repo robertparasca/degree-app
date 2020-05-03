@@ -3,6 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import axiosInstance, { unsetToken, setToken } from '../../../utils/axios';
 import { removeToken, saveToken } from '../../../utils/localStorageHelpers';
 
+import authMock from './auth.mock';
+import { setIsRoleProps } from './helpers';
+
 const initialState = {
     user: null,
     isUserLoggedIn: null,
@@ -18,7 +21,7 @@ const authSlice = createSlice({
         },
         loginSuccess(state, { payload }) {
             state.loading = false;
-            state.user = payload.user;
+            state.user = setIsRoleProps(payload.user);
             state.isUserLoggedIn = true;
             saveToken(payload.token);
             setToken(payload.token);
@@ -38,29 +41,13 @@ const authSlice = createSlice({
         meLoading(state) {
             state.loading = true;
         },
-        meLoadingSuccess(state, { payload }) {
-            state.loading = false;
-            state.user = payload.user;
-            state.isUserLoggedIn = true;
-            saveToken(payload.token);
-            setToken(payload.token);
-        },
         meLoadingFail(state) {
             state.loading = false;
         }
     }
 });
 
-export const {
-    loginFail,
-    loginSuccess,
-    loginLoading,
-    clearAuth,
-    logout,
-    meLoading,
-    meLoadingFail,
-    meLoadingSuccess
-} = authSlice.actions;
+export const { loginFail, loginSuccess, loginLoading, clearAuth, logout, meLoading } = authSlice.actions;
 
 export const login = (values) => async (dispatch) => {
     dispatch(loginLoading());
@@ -68,11 +55,21 @@ export const login = (values) => async (dispatch) => {
     console.log(values);
 
     setTimeout(() => {
-        const data = {
-            user: { name: 'Robert' },
-            token: 'blah'
-        };
-        dispatch(loginSuccess(data));
+        dispatch(loginSuccess(authMock));
+    }, 1000);
+    // try {
+    //     const data = await axiosInstance.get('/posts');
+    //     dispatch(loginSuccess(data));
+    // } catch (e) {
+    //     dispatch(loginFail(e.response));
+    // }
+};
+
+export const me = () => async (dispatch) => {
+    dispatch(meLoading());
+
+    setTimeout(() => {
+        dispatch(loginSuccess(authMock));
     }, 1000);
     // try {
     //     const data = await axiosInstance.get('/posts');
@@ -84,24 +81,6 @@ export const login = (values) => async (dispatch) => {
 
 export const googleLogin = (values) => async (dispatch) => {
     console.log(values);
-};
-
-export const me = () => async (dispatch) => {
-    dispatch(meLoading());
-
-    setTimeout(() => {
-        const data = {
-            user: { name: 'Robert', role: 'staff' },
-            token: 'blah'
-        };
-        dispatch(meLoadingSuccess(data));
-    }, 1000);
-    // try {
-    //     const data = await axiosInstance.get('/posts');
-    //     dispatch(loginSuccess(data));
-    // } catch (e) {
-    //     dispatch(loginFail(e.response));
-    // }
 };
 
 export default authSlice.reducer;

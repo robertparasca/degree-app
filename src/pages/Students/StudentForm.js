@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { Form, Input, Button } from 'antd';
 
 import Spinner from '../../components/Spinner';
-import { fetchStaff, clearState } from '../../redux/reducers/Staff/staffView';
-import { getStaffIdFromRoute } from '../../utils/pagesHelpers';
+
+import { fetchStudent, clearState } from '../../redux/reducers/Students/studentView';
 
 const layout = {
     labelCol: { span: 4 },
@@ -12,13 +13,12 @@ const layout = {
 };
 
 const StudentForm = () => {
+    const { id } = useParams();
     const dispatch = useDispatch();
-    const { staff, loading } = useSelector((state) => state.staffSlice.staffView);
-    const router = useSelector((state) => state.router);
+    const { student, loading } = useSelector((state) => state.studentsSlice.studentView);
 
     useEffect(() => {
-        const id = getStaffIdFromRoute(router);
-        dispatch(fetchStaff(id));
+        dispatch(fetchStudent(id));
 
         console.log('mount');
 
@@ -26,7 +26,7 @@ const StudentForm = () => {
             console.log('unmount');
             dispatch(clearState());
         };
-    }, []);
+    }, [id, dispatch]);
 
     if (loading) {
         return <Spinner />;
@@ -35,8 +35,10 @@ const StudentForm = () => {
     const onFinish = () => {};
     const onFinishFailed = () => {};
 
+    // console.log(id, student.name);
     return (
         <section>
+            <h1>student {student.name}</h1>
             {/*<Form {...layout} name='basic' initialValues={{}} onFinish={onFinish} onFinishFailed={onFinishFailed}>*/}
             {/*    <Form.Item*/}
             {/*        label='Email'*/}

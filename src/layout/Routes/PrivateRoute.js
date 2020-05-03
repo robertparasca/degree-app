@@ -11,7 +11,6 @@ const PrivateRoute = ({ component: Component, roleRequired, ...rest }) => {
             {...rest}
             render={(props) => {
                 if (hasToken() && user) {
-                    console.log(user.role, roleRequired);
                     if (roleRequired.indexOf(user.role) === -1) {
                         return <Redirect to='/404' />;
                     }
