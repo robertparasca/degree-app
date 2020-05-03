@@ -3,6 +3,7 @@ import { Button, Tabs } from 'antd';
 import { Link } from 'react-router-dom';
 
 import InstituteDetails from './InstituteDetails';
+import ImportTab from './ImportTab';
 
 const { TabPane } = Tabs;
 
@@ -22,8 +23,8 @@ const Settings = (props) => {
                     </div>
                     {/* <TicketTypes /> */}
                 </TabPane>
-                <TabPane tab='Import studenți' key='3' className='import-students individual-tab'>
-                    {/* <ImportTab onDrop={this.onDrop} /> */}
+                <TabPane tab='Import studenți și situația burselor' key='3' className='import-students individual-tab'>
+                    <ImportTab />
                 </TabPane>
             </Tabs>
         </section>

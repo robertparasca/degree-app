@@ -62,8 +62,10 @@ export const {
     meLoadingSuccess
 } = authSlice.actions;
 
-export const login = () => async (dispatch) => {
+export const login = (values) => async (dispatch) => {
     dispatch(loginLoading());
+
+    console.log(values);
 
     setTimeout(() => {
         const data = {
@@ -80,12 +82,16 @@ export const login = () => async (dispatch) => {
     // }
 };
 
+export const googleLogin = (values) => async (dispatch) => {
+    console.log(values);
+};
+
 export const me = () => async (dispatch) => {
     dispatch(meLoading());
 
     setTimeout(() => {
         const data = {
-            user: { name: 'Robert' },
+            user: { name: 'Robert', role: 'staff' },
             token: 'blah'
         };
         dispatch(meLoadingSuccess(data));

@@ -5,23 +5,23 @@ import { PageHeader } from 'antd';
 
 import Spinner from '../../components/Spinner';
 
-import { fetchStaff, clearState } from '../../redux/reducers/Staff/staffView';
+import { fetchStudent, clearState } from '../../redux/reducers/Students/studentView';
 import { getStaffIdFromRoute } from '../../utils/pagesHelpers';
 
-const StaffView = () => {
+const StudentView = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const { loading, staff } = useSelector((state) => state.staffSlice.staffView);
+    const { loading, student } = useSelector((state) => state.studentsSlice.studentView);
     const router = useSelector((state) => state.router);
 
     useEffect(() => {
         const staffId = getStaffIdFromRoute(router);
-        dispatch(fetchStaff(staffId));
+        dispatch(fetchStudent(staffId));
 
         return () => dispatch(clearState());
     }, []);
 
-    const onBack = () => history.push('/staff');
+    const onBack = () => history.push('/studenti');
 
     if (loading) {
         return <Spinner />;
@@ -29,9 +29,9 @@ const StaffView = () => {
 
     return (
         <>
-            <PageHeader onBack={onBack} title={staff.name} subTitle='This is a subtitle' />
+            <PageHeader onBack={onBack} title={student.name} subTitle='This is a subtitle' />
         </>
     );
 };
 
-export default StaffView;
+export default StudentView;

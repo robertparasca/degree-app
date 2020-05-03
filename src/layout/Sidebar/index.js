@@ -4,44 +4,22 @@ import { NavLink } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
+import menuItems from './menuItems';
+
 const { Sider } = Layout;
 
 const Sidebar = () => {
+    const { user } = useSelector((state) => state.authSlice);
     const { location } = useSelector((state) => state.router);
-
-    const menuItems = [
-        {
-            name: 'Acasa',
-            path: '/dashboard',
-            exact: true
-        },
-        {
-            name: 'Adeverinte',
-            path: '/adeverinte',
-            exact: true
-        },
-        {
-            name: 'Studenti',
-            path: '/studenti',
-            exact: true
-        },
-        {
-            name: 'Staff',
-            path: '/staff',
-            exact: true
-        },
-        {
-            name: 'Setari',
-            path: '/setari',
-            exact: true
-        }
-    ];
 
     return (
         <Sider trigger={null} collapsible collapsed={false}>
             <div className='logo' />
             <Menu theme='dark' mode='inline' defaultSelectedKeys={[location.pathname]}>
-                {menuItems.map(({ path, name, exact }) => {
+                {menuItems.map(({ path, name, exact, roleRequired }) => {
+                    if (roleRequired.indexOf(user.role) === -1) {
+                        return null;
+                    }
                     return (
                         <Menu.Item key={path}>
                             <UserOutlined />
