@@ -1,62 +1,82 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, Input, Button } from 'antd';
+import { Form, Input } from 'antd';
 
 import Spinner from '../../components/Spinner';
 import { fetchStaff, clearState } from '../../redux/reducers/Staff/staffView';
+import { createStaff, updateStaff } from '../../redux/reducers/Staff/staffForm';
 
 const layout = {
     labelCol: { span: 4 },
-    wrapperCol: { span: 16 }
+    wrapperCol: { span: 20 }
 };
 
-const StaffForm = ({ id }) => {
+const StaffForm = ({ staffId: id, setModalVisible, setStaffId }) => {
     const dispatch = useDispatch();
     const { staff, loading } = useSelector((state) => state.staffSlice.staffView);
-    const router = useSelector((state) => state.router);
+    const { success, errors, loading: formLoading } = useSelector((state) => state.staffSlice.staffForm);
 
     useEffect(() => {
-        dispatch(fetchStaff(id));
+        if (id) {
+            dispatch(fetchStaff(id));
+        }
+        return () => dispatch(clearState());
+    }, [id, dispatch]);
 
-        console.log('mount');
+    useCallback(() => {
+        if (success) {
+            setModalVisible(false);
+            setStaffId(null);
+        }
+    }, [success, setModalVisible, setStaffId]);
 
-        return () => {
-            console.log('unmount');
-            dispatch(clearState());
-        };
-    }, []);
+    const onFinish = useCallback(
+        (form) => {
+            console.log(form);
+            if (id) {
+                dispatch(updateStaff(form));
+            } else {
+                dispatch(createStaff(form));
+            }
+        },
+        [id, dispatch]
+    );
 
-    if (loading) {
+    const onFinishFailed = (values) => {};
+
+    if (loading || formLoading) {
         return <Spinner />;
     }
 
-    const onFinish = () => {};
-    const onFinishFailed = () => {};
-
     return (
         <section>
-            <Form {...layout} name='basic' initialValues={{}} onFinish={onFinish} onFinishFailed={onFinishFailed}>
+            <Form
+                id='edit-staff-form'
+                name='basic'
+                initialValues={staff}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                {...layout}
+            >
+                <Form.Item label='Nume' name='name' rules={[{ required: true, message: 'Te rog introdu numele.' }]}>
+                    <Input />
+                </Form.Item>
                 <Form.Item
                     label='Email'
                     name='email'
-                    rules={[{ required: true, message: 'Please input your username!' }]}
+                    rules={[{ required: true, message: 'Te rog introdu adresa de email.' }]}
                 >
                     <Input />
                 </Form.Item>
-
-                <Form.Item
-                    label='Parola'
-                    name='password'
-                    rules={[{ required: true, message: 'Please input your password!' }]}
-                >
-                    <Input.Password />
-                </Form.Item>
-
-                <Form.Item>
-                    <Button type='primary' htmlType='submit'>
-                        Submit
-                    </Button>
-                </Form.Item>
+                {!id ? (
+                    <Form.Item
+                        label='Parola'
+                        name='password'
+                        rules={[{ required: true, message: 'Te rog introdu o parola.' }]}
+                    >
+                        <Input.Password />
+                    </Form.Item>
+                ) : null}
             </Form>
         </section>
     );
