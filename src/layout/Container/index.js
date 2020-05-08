@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Layout } from 'antd';
 
-import Header from '../Header';
+import Header from 'app-layout/Header';
 
 const { Content } = Layout;
 

@@ -3,12 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Layout, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
-import Container from '../Container';
-import Routes from '../Routes';
-import Sidebar from '../Sidebar';
-import { hasToken, getToken } from '../../utils/localStorageHelpers';
-import { me } from '../../redux/reducers/Auth';
-import menuItems from '../Sidebar/menuItems';
+import Container from 'app-layout/Container';
+import Routes from 'app-layout/Routes';
+import Sidebar from 'app-layout/Sidebar';
+import { hasToken, getToken } from 'app-utils/localStorageHelpers';
+import { me } from 'app-reducers/Auth';
+import menuItems from 'app-layout/Sidebar/menuItems';
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 

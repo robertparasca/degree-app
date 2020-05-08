@@ -3,9 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Form, Input, Button } from 'antd';
 
-import Spinner from '../../components/Spinner';
-
-import { fetchStudent, clearState } from '../../redux/reducers/Students/studentView';
+import Spinner from 'app-components/Spinner';
+import { fetchStudent, clearState } from 'app-reducers/Students/studentView';
 
 const layout = {
     labelCol: { span: 4 },

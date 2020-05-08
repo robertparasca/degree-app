@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Button } from 'antd';
-import StudentsImport from '../../components/StudentsImport';
+
+import StudentsImport from 'app-components/StudentsImport';
 
 const ImportTab = (props) => {
     const { importStudents, loading } = useSelector((state) => state.settingsSlice.importStudentsDataSlice);

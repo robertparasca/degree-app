@@ -4,9 +4,8 @@ import { useParams } from 'react-router-dom';
 import { push } from 'connected-react-router';
 import { PageHeader } from 'antd';
 
-import Spinner from '../../components/Spinner';
-
-import { fetchStudent, clearState } from '../../redux/reducers/Students/studentView';
+import Spinner from 'app-components/Spinner';
+import { fetchStudent, clearState } from 'app-reducers/Students/studentView';
 
 const StudentView = () => {
     const { id } = useParams();

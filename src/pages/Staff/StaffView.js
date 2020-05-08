@@ -4,9 +4,8 @@ import { useParams } from 'react-router-dom';
 import { push } from 'connected-react-router';
 import { PageHeader } from 'antd';
 
-import Spinner from '../../components/Spinner';
-
-import { fetchStaff, clearState } from '../../redux/reducers/Staff/staffView';
+import Spinner from 'app-components/Spinner';
+import { fetchStaff, clearState } from 'app-reducers/Staff/staffView';
 
 const StaffView = () => {
     const { id } = useParams();

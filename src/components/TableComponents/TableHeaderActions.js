@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'antd';
 import { UserAddOutlined } from '@ant-design/icons';
 
-import SearchTable from '../SearchTable';
+import SearchTable from 'app-components/SearchTable';
 
 const TableHeaderActions = ({ addFunction, searchAction }) => {
     return (

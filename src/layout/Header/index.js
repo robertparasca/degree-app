@@ -4,7 +4,7 @@ import { MenuUnfoldOutlined, MenuFoldOutlined, UserOutlined } from '@ant-design/
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { logout } from '../../redux/reducers/Auth';
+import { logout } from 'app-reducers/Auth';
 
 const { Header: AntdHeader } = Layout;
 

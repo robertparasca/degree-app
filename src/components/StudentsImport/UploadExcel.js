@@ -7,7 +7,7 @@ const UploadExcel = ({ customOnDrop, chosenYear }) => {
         (acceptedFiles) => {
             customOnDrop(acceptedFiles, chosenYear);
         },
-        [chosenYear]
+        [chosenYear, customOnDrop]
     );
     const { getRootProps, getInputProps } = useDropzone({
         onDrop

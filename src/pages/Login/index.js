@@ -4,9 +4,9 @@ import { Redirect } from 'react-router-dom';
 import { Form, Input, Button } from 'antd';
 import { GoogleLogin } from 'react-google-login';
 
-import CustomGoogleLogin from '../../components/CustomGoogleLogin';
-import { login, googleLogin } from '../../redux/reducers/Auth';
-import config from '../../utils/config';
+import CustomGoogleLogin from 'app-components/CustomGoogleLogin';
+import { login, googleLogin } from 'app-reducers/Auth';
+import config from 'app-utils/config';
 
 const layout = {
     labelCol: { span: 8 },

@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Button, Input, Table } from 'antd';
 import { EditOutlined, UserAddOutlined, DeleteOutlined, DownloadOutlined } from '@ant-design/icons';
-
-import { clearState, fetchTicketsList } from '../../redux/reducers/Tickets/ticketsList';
 import dayjs from 'dayjs';
-import config from '../../utils/config';
-import { Link } from 'react-router-dom';
+
+import { clearState, fetchTicketsList } from 'app-reducers/Tickets/ticketsList';
+import config from 'app-utils/config';
+
 const { Search } = Input;
 
 const Tickets = () => {

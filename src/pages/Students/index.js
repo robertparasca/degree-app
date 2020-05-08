@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button, Table, Input } from 'antd';
 import { EditOutlined, UserAddOutlined, DeleteOutlined } from '@ant-design/icons';
 
-import { clearState, fetchStudentsList } from '../../redux/reducers/Students/studentsList';
+import { clearState, fetchStudentsList } from 'app-reducers/Students/studentsList';
 
 const { Search } = Input;
 

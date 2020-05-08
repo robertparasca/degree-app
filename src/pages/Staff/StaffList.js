@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import { Table, Button } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 
-import { fetchStaffList, clearState, deleteStaff } from '../../redux/reducers/Staff/staffList';
 import StaffModal from './StaffModal';
-import DeleteButton from '../../components/TableComponents/DeleteButton';
-import TableHeaderActions from '../../components/TableComponents/TableHeaderActions';
+import DeleteButton from 'app-components/TableComponents/DeleteButton';
+import TableHeaderActions from 'app-components/TableComponents/TableHeaderActions';
+import { fetchStaffList, clearState, deleteStaff } from 'app-reducers/Staff/staffList';
 
 const StaffList = () => {
     const dispatch = useDispatch();

@@ -1,4 +1,4 @@
-import config from '../../utils/config';
+import config from 'app-utils/config';
 
 const { STAFF, STUDENT } = config.roles;
 

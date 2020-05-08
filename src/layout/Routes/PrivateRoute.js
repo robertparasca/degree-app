@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
-import { hasToken } from '../../utils/localStorageHelpers';
+
+import { hasToken } from 'app-utils/localStorageHelpers';
 
 const PrivateRoute = ({ component: Component, roleRequired, ...rest }) => {
     const { user } = useSelector((state) => state.authSlice);

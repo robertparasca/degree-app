@@ -2,9 +2,9 @@ import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input } from 'antd';
 
-import Spinner from '../../components/Spinner';
-import { fetchStaff, clearState } from '../../redux/reducers/Staff/staffView';
-import { createStaff, updateStaff } from '../../redux/reducers/Staff/staffForm';
+import Spinner from 'app-components/Spinner';
+import { fetchStaff, clearState } from 'app-reducers/Staff/staffView';
+import { createStaff, updateStaff } from 'app-reducers/Staff/staffForm';
 
 const layout = {
     labelCol: { span: 4 },

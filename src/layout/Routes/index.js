@@ -3,19 +3,19 @@ import React from 'react';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 
-import Dashboard from '../../pages/Dashboard';
-import Tickets from '../../pages/Tickets';
-import Students from '../../pages/Students';
-import StudentView from '../../pages/Students/StudentView';
-import StudentForm from '../../pages/Students/StudentForm';
-import StaffList from '../../pages/Staff/StaffList';
-import StaffView from '../../pages/Staff/StaffView';
-import StaffForm from '../../pages/Staff/StaffForm';
-import Settings from '../../pages/Settings';
-import MyProfile from '../../pages/MyProfile';
-import Login from '../../pages/Login';
+import Dashboard from 'app-pages/Dashboard';
+import Tickets from 'app-pages/Tickets';
+import Students from 'app-pages/Students';
+import StudentView from 'app-pages/Students/StudentView';
+import StudentForm from 'app-pages/Students/StudentForm';
+import StaffList from 'app-pages/Staff/StaffList';
+import StaffView from 'app-pages/Staff/StaffView';
+import StaffForm from 'app-pages/Staff/StaffForm';
+import Settings from 'app-pages/Settings';
+import MyProfile from 'app-pages/MyProfile';
+import Login from 'app-pages/Login';
 
-import config from '../../utils/config';
+import config from 'app-utils/config';
 
 const { STAFF, STUDENT } = config.roles;
 
