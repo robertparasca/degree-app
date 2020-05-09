@@ -4,4 +4,9 @@
     position: relative;
     top: calc((100vh - 400px) / 2);
     height: 400px;
+
+    .login-errors {
+        width: 200px;
+        margin: 0 auto;
+    }
 }

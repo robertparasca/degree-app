@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Alert } from 'antd';
 import { GoogleLogin } from 'react-google-login';
 
 import CustomGoogleLogin from 'app-components/CustomGoogleLogin';
@@ -22,7 +22,7 @@ const responseGoogle = (response) => {
 };
 
 const Login = () => {
-    const { isUserLoggedIn } = useSelector((state) => state.authSlice);
+    const { isUserLoggedIn, loginErrors } = useSelector((state) => state.authSlice);
     const dispatch = useDispatch();
 
     if (isUserLoggedIn) {
@@ -32,9 +32,14 @@ const Login = () => {
     const onFinish = (values) => dispatch(login(values));
     const onFinishFailed = () => {};
 
+    const fake = {
+        email: 'parascarobert@gmail.com',
+        password: 'password'
+    };
+
     return (
         <section id='login-container'>
-            <Form {...layout} name='basic' initialValues={{}} onFinish={onFinish} onFinishFailed={onFinishFailed}>
+            <Form {...layout} name='basic' initialValues={fake} onFinish={onFinish} onFinishFailed={onFinishFailed}>
                 <Form.Item
                     label='Email'
                     name='email'
@@ -57,13 +62,14 @@ const Login = () => {
                     </Button>
                 </Form.Item>
             </Form>
-            <GoogleLogin
-                clientId={config.googleClient}
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}
-                cookiePolicy={'single_host_origin'}
-                render={(renderProps) => <CustomGoogleLogin {...renderProps} />}
-            />
+            {loginErrors ? <Alert message={loginErrors.message} type='error' className='login-errors' /> : null}
+            {/*<GoogleLogin*/}
+            {/*    clientId={config.googleClient}*/}
+            {/*    onSuccess={responseGoogle}*/}
+            {/*    onFailure={responseGoogle}*/}
+            {/*    cookiePolicy={'single_host_origin'}*/}
+            {/*    render={(renderProps) => <CustomGoogleLogin {...renderProps} />}*/}
+            {/*/>*/}
         </section>
     );
 };

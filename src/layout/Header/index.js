@@ -4,7 +4,7 @@ import { MenuUnfoldOutlined, MenuFoldOutlined, UserOutlined } from '@ant-design/
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { logout } from 'app-reducers/Auth';
+import { logoutAsync } from 'app-reducers/Auth';
 
 const { Header: AntdHeader } = Layout;
 
@@ -18,7 +18,7 @@ const Header = () => {
             <Menu.Item>
                 <Link to='/profilul-meu'>Profilul meu</Link>
             </Menu.Item>
-            <Menu.Item onClick={() => dispatch(logout())}>
+            <Menu.Item onClick={() => dispatch(logoutAsync())}>
                 <span>Logout</span>
             </Menu.Item>
         </Menu>

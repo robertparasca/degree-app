@@ -11,12 +11,12 @@ import { fetchStaffList, clearState, deleteStaff } from 'app-reducers/Staff/staf
 
 const StaffList = () => {
     const dispatch = useDispatch();
-    const { loading, staffList: staff } = useSelector((state) => state.staffSlice.staffList);
+    const { loading, staffList: staff, pager } = useSelector((state) => state.staffSlice.staffList);
     const [modalVisible, setModalVisible] = useState(false);
     const [staffId, setStaffId] = useState(null);
 
     useEffect(() => {
-        dispatch(fetchStaffList());
+        dispatch(fetchStaffList({ page: 1 }));
 
         return () => dispatch(clearState());
     }, [dispatch]);
@@ -30,17 +30,25 @@ const StaffList = () => {
 
     const removeStaff = (id) => dispatch(deleteStaff(id));
 
+    const pageChanged = (page) => {
+        dispatch(fetchStaffList({ page }));
+    };
+
     const columns = [
         {
             title: 'Nume',
             dataIndex: 'name',
             key: 'name',
-            render: (text, record) => <Link to={`/staff/vizualizare/${record.id}`}>{record.name}</Link>
+            render: (text, record) => (
+                <Link to={`/staff/vizualizare/${record.id}`}>
+                    {record.last_name} {record.first_name}
+                </Link>
+            )
         },
         {
             title: 'Email',
-            dataIndex: 'email',
-            key: 'email'
+            dataIndex: 'university_email',
+            key: 'university_email'
         },
         {
             title: 'Edit',
@@ -67,7 +75,13 @@ const StaffList = () => {
                 setStaffId={setStaffId}
             />
             <TableHeaderActions addFunction={addStaff} searchAction={fetchStaffList} />
-            <Table dataSource={staff} loading={loading} columns={columns} rowKey='id' />
+            <Table
+                dataSource={staff}
+                loading={loading}
+                columns={columns}
+                rowKey='id'
+                pagination={{ total: pager.total, pageSize: pager.per_page, onChange: pageChanged }}
+            />
         </section>
     );
 };

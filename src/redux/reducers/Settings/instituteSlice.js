@@ -20,17 +20,24 @@ const instituteSlice = createSlice({
         },
         fetchInstituteFail(state) {
             state.loading = false;
-        }
+        },
+        clearState: () => initialState
     }
 });
 
-export const { fetchInstituteFail, fetchInstituteSuccess, fetchInstituteLoading } = instituteSlice.actions;
+export const { fetchInstituteFail, fetchInstituteSuccess, fetchInstituteLoading, clearState } = instituteSlice.actions;
 
 export const fetchInstitute = () => async (dispatch) => {
     dispatch(fetchInstituteLoading());
 
     setTimeout(() => {
-        const data = {};
+        const data = {
+            university_name: 'Universitatea Tehnica Gheorghe Asachi',
+            faculty_name: 'Facultatea de Automatica si Calculatoare',
+            dean_name: 'Popescu Ion',
+            secretary_name: 'Popescu Dan',
+            active_year: '2019/2020'
+        };
         dispatch(fetchInstituteSuccess(data));
     }, 1000);
     // try {

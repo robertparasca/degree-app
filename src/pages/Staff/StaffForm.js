@@ -63,7 +63,7 @@ const StaffForm = ({ staffId: id, setModalVisible, setStaffId }) => {
                 </Form.Item>
                 <Form.Item
                     label='Email'
-                    name='email'
+                    name='university_email'
                     rules={[{ required: true, message: 'Te rog introdu adresa de email.' }]}
                 >
                     <Input />

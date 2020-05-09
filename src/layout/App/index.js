@@ -9,6 +9,7 @@ import Sidebar from 'app-layout/Sidebar';
 import { hasToken, getToken } from 'app-utils/localStorageHelpers';
 import { me } from 'app-reducers/Auth';
 import menuItems from 'app-layout/Sidebar/menuItems';
+import { setToken } from 'app-utils/axios';
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
@@ -29,10 +30,13 @@ const App = () => {
         };
     }, [location.pathname]);
 
-    if (hasToken() && !user && !loading) {
-        const token = getToken();
-        dispatch(me(token));
-    }
+    useEffect(() => {
+        if (hasToken() && !user && !loading) {
+            const token = getToken();
+            setToken(token);
+            dispatch(me(token));
+        }
+    }, []);
 
     if (loading) {
         return <Spin indicator={antIcon} />;
