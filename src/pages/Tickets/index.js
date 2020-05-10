@@ -56,7 +56,7 @@ const Tickets = () => {
             dataIndex: 'name',
             key: 'name',
             render: (text, record) => (
-                <Link to={`/studenti/vizualizare/${record.id}`}>
+                <Link to={`/studenti/vizualizare/${record.user.id}`}>
                     {record.student.last_name} {record.student.first_name}
                 </Link>
             )

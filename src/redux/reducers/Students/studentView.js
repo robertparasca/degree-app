@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import axiosInstance from '../../../utils/axios';
-
-import { studentsListMock } from './students.mock';
+import { apiEndpoint } from 'app-reducers/Students/constants';
 
 const initialState = {
     student: {},
@@ -32,16 +31,12 @@ export const { fetchStudentFail, fetchStudentSuccess, fetchStudentLoading, clear
 export const fetchStudent = (id) => async (dispatch) => {
     dispatch(fetchStudentLoading());
 
-    setTimeout(() => {
-        const data = studentsListMock.find((item) => item.id == id);
+    try {
+        const { data } = await axiosInstance.get(`${apiEndpoint}/${id}`);
         dispatch(fetchStudentSuccess(data));
-    }, 1000);
-    // try {
-    //     const data = await axiosInstance.get('/staff');
-    //     dispatch(fetchStudentSuccess(data));
-    // } catch (e) {
-    //     dispatch(fetchStudentFail(e.response));
-    // }
+    } catch (e) {
+        dispatch(fetchStudentFail(e.response));
+    }
 };
 
 export default studentViewSlice.reducer;

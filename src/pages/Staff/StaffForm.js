@@ -13,6 +13,7 @@ const layout = {
 
 const StaffForm = ({ staffId: id, setModalVisible, setStaffId }) => {
     const dispatch = useDispatch();
+    const [formRef] = Form.useForm();
     const { formData, loading } = useSelector((state) => state.staffSlice.staffView);
     const { success, errors, loading: formLoading } = useSelector((state) => state.staffSlice.staffForm);
 
@@ -31,7 +32,20 @@ const StaffForm = ({ staffId: id, setModalVisible, setStaffId }) => {
             setModalVisible(false);
             setStaffId(null);
         }
-    }, [success, setModalVisible, setStaffId]);
+        if (errors) {
+            const formWithErrors = Object.keys(errors).reduce((acc, item) => {
+                return [
+                    ...acc,
+                    {
+                        value: formData[item] + 'wtf',
+                        errors: errors[item]
+                    }
+                ];
+            }, []);
+            console.log(formWithErrors);
+            formRef.setFields(formWithErrors);
+        }
+    }, [formRef, success, errors, formData, setModalVisible, setStaffId]);
 
     const onFinish = useCallback(
         (form) => {
@@ -44,8 +58,6 @@ const StaffForm = ({ staffId: id, setModalVisible, setStaffId }) => {
         [id, dispatch]
     );
 
-    const onFinishFailed = (values) => {};
-
     if (loading || formLoading) {
         return <Spinner />;
     }
@@ -53,11 +65,11 @@ const StaffForm = ({ staffId: id, setModalVisible, setStaffId }) => {
     return (
         <section>
             <Form
+                form={formRef}
                 id='edit-staff-form'
                 name='basic'
                 initialValues={formData}
                 onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
                 {...layout}
             >
                 <Form.Item

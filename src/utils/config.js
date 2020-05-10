@@ -12,5 +12,5 @@ export default {
     },
     dateFormat: 'YYYY-MM-DD HH:mm:ss',
     dateFormatWithoutHours: 'YYYY-MM-DD',
-    dateFormatClient: 'DD-MM-YYYY HH:mm'
+    dateFormatClient: 'DD.MM.YYYY HH:mm'
 };

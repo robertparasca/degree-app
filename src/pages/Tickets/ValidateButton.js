@@ -1,13 +1,13 @@
 import React from 'react';
 import { Button, Popover } from 'antd';
-import { EditOutlined } from '@ant-design/icons';
+import { CheckOutlined } from '@ant-design/icons';
 
 const ValidateButton = ({ onClick, record }) => {
     if (record.is_validated) {
         return (
             <Popover content='Nu poți valida cererea aceasta deoarece a fost deja validată.'>
                 <Button type='primary' disabled>
-                    <EditOutlined />
+                    <CheckOutlined />
                 </Button>
             </Popover>
         );
@@ -15,7 +15,7 @@ const ValidateButton = ({ onClick, record }) => {
 
     return (
         <Button type='primary' onClick={onClick}>
-            <EditOutlined />
+            <CheckOutlined />
         </Button>
     );
 };

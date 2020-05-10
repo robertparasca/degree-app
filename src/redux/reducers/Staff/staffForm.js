@@ -53,7 +53,7 @@ export const updateStaff = (form) => async (dispatch) => {
         dispatch(createStaffSuccess());
         dispatch(fetchStaffList({ page: 1 }));
     } catch (e) {
-        dispatch(createStaffFail(e.response));
+        dispatch(createStaffFail(e.response.data.errors));
     }
 };
 
