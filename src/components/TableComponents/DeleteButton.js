@@ -1,8 +1,21 @@
 import React from 'react';
-import { Button, Popconfirm } from 'antd';
+import { Button, Popconfirm, Popover } from 'antd';
 import { DeleteOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
 
-const DeleteButton = ({ record, removeFunction }) => {
+const DeleteButton = ({ record, removeFunction, staffPage }) => {
+    const { user } = useSelector((state) => state.authSlice);
+
+    if (staffPage && user.id === record.id) {
+        return (
+            <Popover content='Nu îți poți șterge contul tău.'>
+                <Button type='primary' danger disabled>
+                    <DeleteOutlined />
+                </Button>
+            </Popover>
+        );
+    }
+
     return (
         <Popconfirm
             title='Esti sigur? Aceasta actiune este ireversibila!'

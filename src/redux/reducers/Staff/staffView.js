@@ -3,12 +3,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '../../../utils/axios';
 import { apiEndpoint } from './constants';
 
-import { staffListMock } from './staff.mock';
-
 const initialState = {
     staff: {},
     loading: false,
-    errors: null
+    errors: null,
+    formData: {}
 };
 
 const staffViewSlice = createSlice({
@@ -20,6 +19,10 @@ const staffViewSlice = createSlice({
         },
         fetchStaffSuccess(state, { payload }) {
             state.staff = payload;
+            state.formData = {
+                ...payload.staff,
+                email: payload.email
+            };
             state.loading = false;
         },
         fetchStaffFail(state, { payload }) {
@@ -35,17 +38,12 @@ export const { fetchStaffFail, fetchStaffSuccess, fetchStaffLoading, clearState 
 export const fetchStaff = (id) => async (dispatch) => {
     dispatch(fetchStaffLoading());
 
-    setTimeout(() => {
-        const data = staffListMock.find((item) => item.id == id);
+    try {
+        const { data } = await axiosInstance.get(`${apiEndpoint}/${id}`);
         dispatch(fetchStaffSuccess(data));
-    }, 1000);
-
-    // try {
-    //     const data = await axiosInstance.get(`${apiEndpoint}/${id}`);
-    //     dispatch(fetchStaffSuccess(data));
-    // } catch (e) {
-    //     dispatch(fetchStaffFail(e.response));
-    // }
+    } catch (e) {
+        dispatch(fetchStaffFail(e.response));
+    }
 };
 
 export default staffViewSlice.reducer;

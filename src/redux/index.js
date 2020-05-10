@@ -5,6 +5,7 @@ import { createBrowserHistory } from 'history';
 import { routerMiddleware } from 'connected-react-router';
 
 import createRootReducer from './reducers';
+import { setInterceptors } from 'app-utils/axios';
 
 export const history = createBrowserHistory();
 
@@ -15,5 +16,7 @@ middleware.push(thunk);
 enhancers.push(composeWithDevTools(applyMiddleware(routerMiddleware(history), ...middleware)));
 
 const store = createStore(createRootReducer(history), compose(...enhancers));
+
+setInterceptors(store);
 
 export default store;

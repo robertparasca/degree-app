@@ -33,8 +33,8 @@ const Login = () => {
     const onFinishFailed = () => {};
 
     const fake = {
-        email: 'parascarobert@gmail.com',
-        password: 'password'
+        email: 'staff@gmail.com',
+        password: 'asd123'
     };
 
     return (

@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import axiosInstance from '../../../utils/axios';
 import { apiEndpoint } from './constants';
+import { fetchStaffList } from 'app-reducers/Staff/staffList';
 
 const initialState = {
     staff: {},
@@ -23,8 +24,8 @@ const staffFormSlice = createSlice({
         },
         createStaffFail(state, { payload }) {
             state.loading = false;
-            state.errors = payload;
             state.success = false;
+            state.errors = payload;
         },
         clearState: () => initialState
     }
@@ -35,31 +36,25 @@ export const { createStaffFail, createStaffLoading, createStaffSuccess, clearSta
 export const createStaff = (form) => async (dispatch) => {
     dispatch(createStaffLoading());
 
-    setTimeout(() => {
+    try {
+        await axiosInstance.post(apiEndpoint, form);
         dispatch(createStaffSuccess());
-    }, 1000);
-
-    // try {
-    //     await axiosInstance.post(apiEndpoint, form);
-    //     dispatch(createStaffSuccess());
-    // } catch (e) {
-    //     dispatch(createStaffFail(e.response));
-    // }
+        dispatch(fetchStaffList({ page: 1 }));
+    } catch (e) {
+        dispatch(createStaffFail());
+    }
 };
 
 export const updateStaff = (form) => async (dispatch) => {
     dispatch(createStaffLoading());
 
-    setTimeout(() => {
+    try {
+        await axiosInstance.put(`${apiEndpoint}/${form.id}`, form);
         dispatch(createStaffSuccess());
-    }, 1000);
-
-    // try {
-    //     await axiosInstance.put(`${apiEndpoint}/${form.id}`, form);
-    //     dispatch(createStaffSuccess());
-    // } catch (e) {
-    //     dispatch(createStaffFail(e.response));
-    // }
+        dispatch(fetchStaffList({ page: 1 }));
+    } catch (e) {
+        dispatch(createStaffFail(e.response));
+    }
 };
 
 export default staffFormSlice.reducer;

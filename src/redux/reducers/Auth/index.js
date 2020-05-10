@@ -77,10 +77,9 @@ export const me = () => async (dispatch) => {
 
     try {
         const { data } = await axiosInstance.get('/me');
-        console.log(data);
         dispatch(meSuccess(data));
     } catch (e) {
-        dispatch(loginFail(e.response));
+        dispatch(loginFail());
     }
 };
 

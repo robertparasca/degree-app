@@ -58,18 +58,11 @@ export const {
 export const fetchStaffList = (params) => async (dispatch) => {
     dispatch(fetchStaffListLoading());
 
-    console.log(params);
-
-    // setTimeout(() => {
-    //     const data = staffListMock;
-    //     dispatch(fetchStaffListSuccess(data));
-    // }, 1000);
     try {
         const requestParams = {
             page: params.page
         };
         const { data } = await axiosInstance.get(apiEndpoint, { params: requestParams });
-        console.log(data);
         dispatch(fetchStaffListSuccess(data));
     } catch (e) {
         dispatch(fetchStaffListFail(e.response));
@@ -79,17 +72,17 @@ export const fetchStaffList = (params) => async (dispatch) => {
 export const deleteStaff = (id) => async (dispatch) => {
     dispatch(deleteStaffLoading());
 
-    setTimeout(() => {
-        dispatch(deleteStaffSuccess());
-        dispatch(fetchStaffList());
-    }, 1000);
-    // try {
-    //     await axiosInstance.delete(`${apiEndpoint}/${id}`);
+    // setTimeout(() => {
     //     dispatch(deleteStaffSuccess());
     //     dispatch(fetchStaffList());
-    // } catch (e) {
-    //     dispatch(fetchStaffListFail(e.response));
-    // }
+    // }, 1000);
+    try {
+        await axiosInstance.delete(`${apiEndpoint}/${id}`);
+        dispatch(deleteStaffSuccess());
+        dispatch(fetchStaffList({ page: 1 }));
+    } catch (e) {
+        dispatch(fetchStaffListFail(e.response));
+    }
 };
 
 export default staffListSlice.reducer;

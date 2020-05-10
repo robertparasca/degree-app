@@ -41,14 +41,14 @@ const StaffList = () => {
             key: 'name',
             render: (text, record) => (
                 <Link to={`/staff/vizualizare/${record.id}`}>
-                    {record.last_name} {record.first_name}
+                    {record.staff.last_name} {record.staff.first_name}
                 </Link>
             )
         },
         {
             title: 'Email',
-            dataIndex: 'university_email',
-            key: 'university_email'
+            dataIndex: 'email',
+            key: 'email'
         },
         {
             title: 'Edit',
@@ -62,7 +62,7 @@ const StaffList = () => {
         {
             title: 'Delete',
             key: 'delete',
-            render: (text, record) => <DeleteButton record={record} removeFunction={removeStaff} />
+            render: (text, record) => <DeleteButton record={record} removeFunction={removeStaff} staffPage />
         }
     ];
 
