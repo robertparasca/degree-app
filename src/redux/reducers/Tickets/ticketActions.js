@@ -65,14 +65,14 @@ export const validateTicket = (form) => async (dispatch) => {
 };
 
 export const rejectTicket = (form) => async (dispatch) => {
-    dispatch(validateTicketLoading());
+    dispatch(rejectTicketLoading());
 
     try {
         await axiosInstance.post(`${apiEndpoint}/reject/${form.id}`, form);
-        dispatch(validateTicketSuccess());
+        dispatch(rejectTicketSuccess());
         dispatch(fetchTicketsList({ page: 1 }));
     } catch (e) {
-        dispatch(validateTicketFail());
+        dispatch(rejectTicketFail());
     }
 };
 

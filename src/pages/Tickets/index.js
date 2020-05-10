@@ -12,28 +12,27 @@ import TableHeaderActions from 'app-components/TableComponents/TableHeaderAction
 import DeleteButton from 'app-components/TableComponents/DeleteButton';
 import TicketModal from 'app-pages/Tickets/TicketModal';
 import DownloadTicket from 'app-pages/Tickets/DownloadTicket';
-import ValidateTicketModal from 'app-pages/Tickets/ValidateTicketForm';
-import RejectTicketForm from 'app-pages/Tickets/RejectTicketForm';
 import ActionTicketModal from 'app-pages/Tickets/ActionTicketModal';
 
 const Tickets = () => {
     const dispatch = useDispatch();
     const { loading, ticketsList, pager } = useSelector((state) => state.ticketsSlice.ticketsList);
     const { user } = useSelector((state) => state.authSlice);
+
     const [addModalVisible, setAddModalVisible] = useState(false);
     const [actionModalVisible, setActionModalVisible] = useState(false);
     const [ticketId, setTicketId] = useState(null);
-    const [isValidateModal, setIsValidateModal] = useState(false);
+    const [isValidateModal, setIsValidateModal] = useState(null);
 
     const validateTicket = (id) => {
-        setActionModalVisible(true);
         setTicketId(id);
+        setActionModalVisible(true);
         setIsValidateModal(true);
     };
 
     const rejectTicket = (id) => {
-        setActionModalVisible(true);
         setTicketId(id);
+        setActionModalVisible(true);
         setIsValidateModal(false);
     };
 
@@ -78,11 +77,15 @@ const Tickets = () => {
             render: (text) => <span>{dayjs(text).format(config.dateFormat)}</span>
         },
         {
+            title: 'Motiv respingere',
+            dataIndex: 'rejection_reason',
+            key: 'rejection_reason',
+            render: (text) => <span>{text ? text : '-'}</span>
+        },
+        {
             title: 'Descarca',
             key: 'download',
-            render: (text, record) => (
-                <DownloadTicket onClick={() => downloadTicket(record.id)} disabled={!record.is_validated} />
-            )
+            render: (text, record) => <DownloadTicket onClick={() => downloadTicket(record.id)} record={record} />
         },
         {
             title: 'Valideaza',
@@ -110,7 +113,7 @@ const Tickets = () => {
             )
         }
     ];
-    const studentColumnsKeys = ['reason', 'created_at', 'download', 'delete'];
+    const studentColumnsKeys = ['reason', 'created_at', 'download', 'delete', 'rejection_reason'];
     const adminExcludedColumnKeys = ['delete'];
     const columns = user.isStudent
         ? allColumns.filter((column) => studentColumnsKeys.indexOf(column.key) !== -1)

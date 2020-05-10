@@ -18,6 +18,7 @@ const ActionTicketModal = ({ id, setTicketId, visible, setModalVisible, validate
     }, [dispatch]);
 
     useEffect(() => {
+        console.log(success);
         if (success) {
             setModalVisible(false);
             setTicketId(null);
@@ -44,11 +45,6 @@ const ActionTicketModal = ({ id, setTicketId, visible, setModalVisible, validate
     };
 
     const getModalTitle = validate ? 'Valideaza cererea' : 'Respinge cererea';
-
-    if (loading) {
-        return <Spinner />;
-    }
-
     return (
         <Modal
             title={getModalTitle}
