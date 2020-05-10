@@ -5,7 +5,7 @@ import PublicRoute from './PublicRoute';
 
 import Dashboard from 'app-pages/Dashboard';
 import Tickets from 'app-pages/Tickets';
-import Students from 'app-pages/Students';
+import StudentsList from 'app-pages/Students/StudentsLIst';
 import StudentView from 'app-pages/Students/StudentView';
 import StudentForm from 'app-pages/Students/StudentForm';
 import StaffList from 'app-pages/Staff/StaffList';
@@ -42,7 +42,7 @@ const Routes = () => {
             roleRequired: [STAFF, STUDENT]
         },
         {
-            component: Students,
+            component: StudentsList,
             path: '/studenti',
             exact: true,
             roleRequired: [STAFF]

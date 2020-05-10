@@ -7,10 +7,12 @@ import SearchTable from 'app-components/SearchTable';
 const TableHeaderActions = ({ addFunction, searchAction }) => {
     return (
         <section id='table-actions'>
-            <SearchTable searchAction={searchAction} />
-            <Button type='primary' onClick={addFunction}>
-                <UserAddOutlined />
-            </Button>
+            {searchAction ? <SearchTable searchAction={searchAction} /> : null}
+            {addFunction ? (
+                <Button type='primary' onClick={addFunction}>
+                    <UserAddOutlined />
+                </Button>
+            ) : null}
         </section>
     );
 };

@@ -8,6 +8,7 @@ import StaffModal from './StaffModal';
 import DeleteButton from 'app-components/TableComponents/DeleteButton';
 import TableHeaderActions from 'app-components/TableComponents/TableHeaderActions';
 import { fetchStaffList, clearState, deleteStaff } from 'app-reducers/Staff/staffList';
+import TableWrapper from 'app-components/TableWrapper';
 
 const StaffList = () => {
     const dispatch = useDispatch();
@@ -29,10 +30,6 @@ const StaffList = () => {
     const addStaff = () => setModalVisible(true);
 
     const removeStaff = (id) => dispatch(deleteStaff(id));
-
-    const pageChanged = (page) => {
-        dispatch(fetchStaffList({ page }));
-    };
 
     const columns = [
         {
@@ -75,12 +72,12 @@ const StaffList = () => {
                 setStaffId={setStaffId}
             />
             <TableHeaderActions addFunction={addStaff} searchAction={fetchStaffList} />
-            <Table
+            <TableWrapper
                 dataSource={staff}
                 loading={loading}
                 columns={columns}
-                rowKey='id'
-                pagination={{ total: pager.total, pageSize: pager.per_page, onChange: pageChanged }}
+                pagination={{ total: pager.total, pageSize: pager.per_page }}
+                fetchData={fetchStaffList}
             />
         </section>
     );

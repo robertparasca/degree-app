@@ -72,16 +72,12 @@ export const fetchStaffList = (params) => async (dispatch) => {
 export const deleteStaff = (id) => async (dispatch) => {
     dispatch(deleteStaffLoading());
 
-    // setTimeout(() => {
-    //     dispatch(deleteStaffSuccess());
-    //     dispatch(fetchStaffList());
-    // }, 1000);
     try {
         await axiosInstance.delete(`${apiEndpoint}/${id}`);
         dispatch(deleteStaffSuccess());
         dispatch(fetchStaffList({ page: 1 }));
     } catch (e) {
-        dispatch(fetchStaffListFail(e.response));
+        dispatch(deleteStaffFail());
     }
 };
 
