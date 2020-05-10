@@ -11,5 +11,6 @@ export default {
         STUDENT: 'student'
     },
     dateFormat: 'YYYY-MM-DD HH:mm:ss',
-    dateFormatWithoutHours: 'YYYY-MM-DD'
+    dateFormatWithoutHours: 'YYYY-MM-DD',
+    dateFormatClient: 'DD-MM-YYYY HH:mm'
 };

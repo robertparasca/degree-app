@@ -13,6 +13,8 @@ import DeleteButton from 'app-components/TableComponents/DeleteButton';
 import TicketModal from 'app-pages/Tickets/TicketModal';
 import DownloadTicket from 'app-pages/Tickets/DownloadTicket';
 import ActionTicketModal from 'app-pages/Tickets/ActionTicketModal';
+import ValidateButton from 'app-pages/Tickets/ValidateButton';
+import RejectButton from 'app-pages/Tickets/RejectButton';
 
 const Tickets = () => {
     const dispatch = useDispatch();
@@ -74,7 +76,7 @@ const Tickets = () => {
             title: 'Dată creare',
             dataIndex: 'created_at',
             key: 'created_at',
-            render: (text) => <span>{dayjs(text).format(config.dateFormat)}</span>
+            render: (text) => <span>{dayjs(text).format(config.dateFormatClient)}</span>
         },
         {
             title: 'Motiv respingere',
@@ -90,20 +92,12 @@ const Tickets = () => {
         {
             title: 'Valideaza',
             key: 'validate',
-            render: (text, record) => (
-                <Button type='primary' onClick={() => validateTicket(record.id)} disabled={record.is_validated}>
-                    <EditOutlined />
-                </Button>
-            )
+            render: (text, record) => <ValidateButton onClick={() => validateTicket(record.id)} record={record} />
         },
         {
             title: 'Respinge',
             key: 'reject',
-            render: (text, record) => (
-                <Button type='primary' danger onClick={() => rejectTicket(record.id)} disabled={record.is_validated}>
-                    <EditOutlined />
-                </Button>
-            )
+            render: (text, record) => <RejectButton onClick={() => rejectTicket(record.id)} record={record} />
         },
         {
             title: 'Delete',
