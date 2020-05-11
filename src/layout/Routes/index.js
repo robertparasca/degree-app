@@ -16,6 +16,7 @@ import MyProfile from 'app-pages/MyProfile';
 import Login from 'app-pages/Login';
 
 import config from 'app-utils/config';
+import ActivateAccount from 'app-pages/ActivateAccount';
 
 const { STAFF, STUDENT } = config.roles;
 
@@ -24,6 +25,11 @@ const Routes = () => {
         {
             component: Login,
             path: '/',
+            exact: true
+        },
+        {
+            component: ActivateAccount,
+            path: '/activate-account',
             exact: true
         }
     ];

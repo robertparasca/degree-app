@@ -93,15 +93,6 @@ const StaffForm = ({ staffId: id, setModalVisible, setStaffId }) => {
                 >
                     <Input />
                 </Form.Item>
-                {!id ? (
-                    <Form.Item
-                        label='Parola'
-                        name='password'
-                        rules={[{ required: true, message: 'Te rog introdu o parola.' }]}
-                    >
-                        <Input.Password />
-                    </Form.Item>
-                ) : null}
             </Form>
         </section>
     );
