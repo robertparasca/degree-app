@@ -15,6 +15,7 @@ import DownloadTicket from 'app-pages/Tickets/DownloadTicket';
 import ActionTicketModal from 'app-pages/Tickets/ActionTicketModal';
 import ValidateButton from 'app-pages/Tickets/ValidateButton';
 import RejectButton from 'app-pages/Tickets/RejectButton';
+import { downloadTicket } from 'app-reducers/Tickets/ticketActions';
 
 const Tickets = () => {
     const dispatch = useDispatch();
@@ -38,7 +39,7 @@ const Tickets = () => {
         setIsValidateModal(false);
     };
 
-    const downloadTicket = (id) => {};
+    const downloadPDF = (id) => dispatch(downloadTicket(id));
 
     const addTicket = () => setAddModalVisible(true);
 
@@ -87,7 +88,7 @@ const Tickets = () => {
         {
             title: 'Descarca',
             key: 'download',
-            render: (text, record) => <DownloadTicket onClick={() => downloadTicket(record.id)} record={record} />
+            render: (text, record) => <DownloadTicket onClick={() => downloadPDF(record.id)} record={record} />
         },
         {
             title: 'Valideaza',

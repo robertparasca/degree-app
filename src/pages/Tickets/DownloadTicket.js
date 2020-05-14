@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Popover } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
 
 const DownloadTicket = ({ onClick, record }) => {
+    const { loading, error, success, fileObject } = useSelector((state) => state.ticketsSlice.ticketActions);
     const disabled = !record.is_validated || !!record.rejection_reason;
 
     if (disabled) {

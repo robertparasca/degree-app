@@ -18,7 +18,7 @@ const Settings = (props) => {
                 <TabPane tab='Tipuri de adeverințe' key='2' className='ticket-types individual-tab'>
                     <div className='header'>
                         <Button type='primary'>
-                            <Link to='/settings/tickets/new'>Adaugă tip</Link>
+                            <Link to='/setari/adeverinte/nou'>Adaugă tip</Link>
                         </Button>
                     </div>
                     {/* <TicketTypes /> */}
