@@ -11,7 +11,7 @@ const Settings = (props) => {
     const changeTab = () => {};
     return (
         <section>
-            <Tabs defaultActiveKey='1' onChange={changeTab} className='settings-tabs'>
+            <Tabs defaultActiveKey='3' onChange={changeTab} className='settings-tabs'>
                 <TabPane tab='Facultate' key='1' className='institute individual-tab'>
                     <InstituteDetails />
                 </TabPane>

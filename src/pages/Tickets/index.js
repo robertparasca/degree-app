@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Button } from 'antd';
-import { EditOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 
 import { clearState, deleteTicket, fetchTicketsList } from 'app-reducers/Tickets/ticketsList';
+import { downloadTicket } from 'app-reducers/Tickets/ticketActions';
 import config from 'app-utils/config';
 import TableWrapper from 'app-components/TableWrapper';
 import TableHeaderActions from 'app-components/TableComponents/TableHeaderActions';
@@ -15,7 +14,6 @@ import DownloadTicket from 'app-pages/Tickets/DownloadTicket';
 import ActionTicketModal from 'app-pages/Tickets/ActionTicketModal';
 import ValidateButton from 'app-pages/Tickets/ValidateButton';
 import RejectButton from 'app-pages/Tickets/RejectButton';
-import { downloadTicket } from 'app-reducers/Tickets/ticketActions';
 
 const Tickets = () => {
     const dispatch = useDispatch();
@@ -62,12 +60,12 @@ const Tickets = () => {
                 </Link>
             )
         },
-        {
-            title: 'Email',
-            dataIndex: 'email',
-            key: 'email',
-            render: (text, record) => <span>{record.user.email}</span>
-        },
+        // {
+        //     title: 'Email',
+        //     dataIndex: 'email',
+        //     key: 'email',
+        //     render: (text, record) => <span>{record.user.email}</span>
+        // },
         {
             title: 'Motiv',
             dataIndex: 'reason',

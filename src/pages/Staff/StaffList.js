@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Table, Button } from 'antd';
+import { Button } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 
 import StaffModal from './StaffModal';

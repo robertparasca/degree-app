@@ -14,9 +14,8 @@ const importStudentsDataSlice = createSlice({
         importStudentsLoading(state) {
             state.loading = true;
         },
-        importStudentsSuccess(state, { payload }) {
+        importStudentsSuccess(state) {
             state.loading = false;
-            state.institute = payload;
         },
         importStudentsFail(state) {
             state.loading = false;
@@ -26,19 +25,17 @@ const importStudentsDataSlice = createSlice({
 
 export const { importStudentsFail, importStudentsSuccess, importStudentsLoading } = importStudentsDataSlice.actions;
 
-export const importStudents = () => async (dispatch) => {
+export const importStudentsAsync = ({ file, year }) => async (dispatch) => {
     dispatch(importStudentsLoading());
-
-    setTimeout(() => {
-        const data = {};
+    const requestData = new FormData();
+    requestData.append('year', year);
+    requestData.append('file', file, file.name);
+    try {
+        const data = await axiosInstance.post('/students/import', requestData);
         dispatch(importStudentsSuccess(data));
-    }, 1000);
-    // try {
-    //     const data = await axiosInstance.get('/posts');
-    //     dispatch(importStudentsSuccess(data));
-    // } catch (e) {
-    //     dispatch(importStudentsFail(e.response));
-    // }
+    } catch (e) {
+        dispatch(importStudentsFail(e.response));
+    }
 };
 
 export default importStudentsDataSlice.reducer;

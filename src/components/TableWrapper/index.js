@@ -14,6 +14,7 @@ const TableWrapper = ({ dataSource, loading, columns, pagination, fetchData }) =
             columns={columns}
             rowKey='id'
             pagination={{ ...pagination, onChange: pageChanged }}
+            size='small'
         />
     );
 };

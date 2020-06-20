@@ -14,10 +14,15 @@ const StudentsImport = ({ customOnDrop }) => {
     return (
         <div className='students-import'>
             <Select placeholder='Alege an' className='select' onChange={handleChange} value={chosenYear}>
-                <Option value='1'>An I</Option>
-                <Option value='2'>An II</Option>
-                <Option value='3'>An III</Option>
-                <Option value='4'>An IV</Option>
+                <Option value='1_bachelor'>An I - licență</Option>
+                <Option value='2_bachelor'>An II - licență</Option>
+                <Option value='3_bachelor'>An III - licență</Option>
+                <Option value='4_bachelor'>An IV - licență</Option>
+                <Option value='1_master'>An I - master</Option>
+                <Option value='2_master'>An II - master</Option>
+                <Option value='1_phd'>An I - doctorat</Option>
+                <Option value='2_phd'>An II - doctorat</Option>
+                <Option value='3_phd'>An III - doctorat</Option>
             </Select>
             <UploadExcel customOnDrop={customOnDrop} chosenYear={chosenYear} />
         </div>

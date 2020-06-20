@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, DatePicker } from 'antd';
 
 import Spinner from 'app-components/Spinner';
 import { clearState, fetchInstitute } from 'app-reducers/Settings/instituteSlice';
+import config from 'app-utils/config';
 
 const layout = {
-    labelCol: { span: 4 },
-    wrapperCol: { span: 20 }
+    labelCol: { span: 6 },
+    wrapperCol: { span: 18 }
 };
 
 const InstituteDetails = (props) => {
@@ -37,25 +38,25 @@ const InstituteDetails = (props) => {
                 {...layout}
             >
                 <Form.Item
-                    label='Universitate'
-                    name='university_name'
+                    label='Dată start semestrul I'
+                    name='start_date'
                     rules={[{ required: true, message: 'Te rog introdu adresa de email.' }]}
                 >
-                    <Input />
+                    <DatePicker format={config.dateFormatClientWithoutHours} />
                 </Form.Item>
                 <Form.Item
-                    label='Facultate'
-                    name='faculty_name'
+                    label='Dată start semestrul al II-lea'
+                    name='mid_date'
                     rules={[{ required: true, message: 'Te rog introdu adresa de email.' }]}
                 >
-                    <Input />
+                    <DatePicker format={config.dateFormatClientWithoutHours} />
                 </Form.Item>
                 <Form.Item
-                    label='An universitar'
-                    name='active_year'
+                    label='Sfârșit an universitar'
+                    name='end_date'
                     rules={[{ required: true, message: 'Te rog introdu adresa de email.' }]}
                 >
-                    <Input />
+                    <DatePicker format={config.dateFormatClientWithoutHours} />
                 </Form.Item>
                 <Form.Item
                     label='Decan'

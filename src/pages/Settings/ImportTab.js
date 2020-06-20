@@ -1,13 +1,16 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd';
 
 import StudentsImport from 'app-components/StudentsImport';
+import { importStudentsAsync } from 'app-reducers/Settings/importStudentsDataSlice';
 
 const ImportTab = (props) => {
+    const dispatch = useDispatch();
     const { importStudents, loading } = useSelector((state) => state.settingsSlice.importStudentsDataSlice);
     const customOnDrop = (acceptedFiles, chosenYear) => {
         console.log(acceptedFiles, chosenYear);
+        dispatch(importStudentsAsync({ file: acceptedFiles[0], year: chosenYear }));
     };
     return (
         <section>
