@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Button } from 'antd';
-import { EditOutlined } from '@ant-design/icons';
 
 import TableWrapper from 'app-components/TableWrapper';
 import TableHeaderActions from 'app-components/TableComponents/TableHeaderActions';
@@ -36,17 +34,6 @@ const StudentsList = () => {
             title: 'Email',
             dataIndex: 'email',
             key: 'email'
-        },
-        {
-            title: 'Edit',
-            key: 'edit',
-            render: (text, record) => (
-                <Button type='primary'>
-                    <Link to={`/studenti/${record.id}`}>
-                        <EditOutlined />
-                    </Link>
-                </Button>
-            )
         },
         {
             title: 'Delete',

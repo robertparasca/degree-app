@@ -33,11 +33,7 @@ const StudentView = () => {
 
     return (
         <>
-            <PageHeader
-                onBack={onBack}
-                title={`${student.student.last_name} ${student.student.first_name}`}
-                subTitle='This is a subtitle'
-            />
+            <PageHeader onBack={onBack} title={`${student.student.last_name} ${student.student.first_name}`} />
             <Tabs defaultActiveKey='1' onChange={changeTab} className='settings-tabs'>
                 <TabPane tab='Detalii student' key='1' className='institute individual-tab'>
                     <Descriptions bordered column={{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }} layout='vertical'>

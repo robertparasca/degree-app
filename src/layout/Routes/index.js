@@ -5,7 +5,7 @@ import PublicRoute from './PublicRoute';
 
 import Dashboard from 'app-pages/Dashboard';
 import Tickets from 'app-pages/Tickets';
-import StudentsList from 'app-pages/Students/StudentsLIst';
+import StudentsList from 'app-pages/Students/StudentsList';
 import StudentView from 'app-pages/Students/StudentView';
 import StudentForm from 'app-pages/Students/StudentForm';
 import StaffList from 'app-pages/Staff/StaffList';

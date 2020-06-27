@@ -1,0 +1,23 @@
+#dashboard {
+  .charts {
+    display: flex;
+    flex-wrap: wrap;
+    .chart {
+      width: 40vw;
+      padding: $defaultSpacing;
+      h3 {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1400px) {
+  #dashboard {
+    .charts {
+      .chart {
+        width: 80vw;
+      }
+    }
+  }
+}

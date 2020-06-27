@@ -1,28 +1,59 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd';
 
 import StudentsImport from 'app-components/StudentsImport';
-import { importStudentsAsync } from 'app-reducers/Settings/importStudentsDataSlice';
+import { importStudentsAsync, getImportInfoAsync, clearState } from 'app-reducers/Settings/importStudentsDataSlice';
+import Spinner from 'app-components/Spinner';
+import dayjs from 'dayjs';
+import config from 'app-utils/config';
 
-const ImportTab = (props) => {
+const ImportTab = () => {
     const dispatch = useDispatch();
-    const { importStudents, loading } = useSelector((state) => state.settingsSlice.importStudentsDataSlice);
+    const { loading, importInfo } = useSelector((state) => state.settingsSlice.importStudentsDataSlice);
     const customOnDrop = (acceptedFiles, chosenYear) => {
         console.log(acceptedFiles, chosenYear);
         dispatch(importStudentsAsync({ file: acceptedFiles[0], year: chosenYear }));
     };
+
+    useEffect(() => {
+        dispatch(getImportInfoAsync());
+
+        return () => dispatch(clearState());
+    }, [dispatch]);
+
+    if (loading) {
+        return <Spinner />;
+    }
+
+    let importStudentsInfo = <p>Nu s-a efecutat niciun import până acum.</p>;
+    if (importInfo.studentImports) {
+        importStudentsInfo = (
+            <p>
+                Data ultimului import de studenți:{' '}
+                <strong>{dayjs(importInfo.studentImports.created_at).format(config.dateFormatClient)}</strong>
+            </p>
+        );
+    }
+
+    let importScholarshipsInfo = <p>Nu s-a efecutat niciun import până acum.</p>;
+    if (importInfo.scholarshipImports) {
+        importScholarshipsInfo = (
+            <p>
+                Data ultimului import de studenți:{' '}
+                <strong>{dayjs(importInfo.scholarshipImports.created_at).format(config.dateFormatClient)}</strong>
+            </p>
+        );
+    }
+
     return (
         <section>
-            <h3>Import studenți și situație burse</h3>
+            <h3>Import studenți</h3>
             <StudentsImport customOnDrop={customOnDrop} />
-            <p>
-                Data ultimului import de studenți: <strong>12.02.2020</strong>
-            </p>
+            {importStudentsInfo}
+            <h3>Import burse</h3>
             <Button type='primary'>Import situație burse</Button>
-            <p>
-                Data ultimului import al situației burselor: <strong>12.02.2020</strong>
-            </p>
+            {importScholarshipsInfo}
         </section>
     );
 };
