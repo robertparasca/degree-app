@@ -19,10 +19,7 @@ const StudentForm = () => {
     useEffect(() => {
         dispatch(fetchStudent(id));
 
-        console.log('mount');
-
         return () => {
-            console.log('unmount');
             dispatch(clearState());
         };
     }, [id, dispatch]);
@@ -34,7 +31,6 @@ const StudentForm = () => {
     const onFinish = () => {};
     const onFinishFailed = () => {};
 
-    // console.log(id, student.name);
     return (
         <section>
             <h1>student {student.name}</h1>

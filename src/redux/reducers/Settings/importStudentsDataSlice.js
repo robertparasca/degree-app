@@ -29,7 +29,6 @@ const importStudentsDataSlice = createSlice({
         },
         getImportInfoSuccess(state, { payload }) {
             state.loading = false;
-            console.log(payload.data);
             state.importInfo = {
                 ...payload.data
             };

@@ -22,8 +22,6 @@ const ActivateAccount = () => {
         location: { query }
     } = useSelector((state) => state.router);
 
-    console.log(query);
-
     if (!query.token) {
         return (
             <section>

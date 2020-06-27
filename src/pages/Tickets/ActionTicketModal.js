@@ -18,7 +18,6 @@ const ActionTicketModal = ({ id, setTicketId, visible, setModalVisible, validate
     }, [dispatch]);
 
     useEffect(() => {
-        console.log(success);
         if (success) {
             setModalVisible(false);
             setTicketId(null);

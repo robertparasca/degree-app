@@ -12,7 +12,6 @@ const ImportTab = () => {
     const dispatch = useDispatch();
     const { loading, importInfo } = useSelector((state) => state.settingsSlice.importStudentsDataSlice);
     const customOnDrop = (acceptedFiles, chosenYear) => {
-        console.log(acceptedFiles, chosenYear);
         dispatch(importStudentsAsync({ file: acceptedFiles[0], year: chosenYear }));
     };
 

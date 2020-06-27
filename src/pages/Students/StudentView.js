@@ -29,8 +29,6 @@ const StudentView = () => {
         return <Spinner />;
     }
 
-    console.log(student);
-
     return (
         <>
             <PageHeader onBack={onBack} title={`${student.student.last_name} ${student.student.first_name}`} />

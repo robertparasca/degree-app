@@ -42,7 +42,6 @@ const StaffForm = ({ staffId: id, setModalVisible, setStaffId }) => {
                     }
                 ];
             }, []);
-            console.log(formWithErrors);
             formRef.setFields(formWithErrors);
         }
     }, [formRef, success, errors, formData, setModalVisible, setStaffId]);

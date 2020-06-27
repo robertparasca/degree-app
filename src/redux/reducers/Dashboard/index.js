@@ -3,6 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '../../../utils/axios';
 import dayjs from 'dayjs';
 import config from 'app-utils/config';
+import { responseHandlerAdmin } from 'app-reducers/Dashboard/admin';
+import { responseHandlerStudent } from 'app-reducers/Dashboard/student';
 
 const initialState = {
     loading: false,
@@ -23,7 +25,6 @@ const dashboardSlice = createSlice({
         },
         getChartDataSuccess(state, { payload }) {
             state.loading = false;
-            console.log(payload);
             state.chartData = payload;
         },
         getChartDataFail(state, { payload }) {
@@ -36,53 +37,12 @@ const dashboardSlice = createSlice({
 
 export const { getChartDataLoading, getChartDataFail, getChartDataSuccess, clearState } = dashboardSlice.actions;
 
-export const getChartData = () => async (dispatch) => {
+export const getChartData = (isAdmin) => async (dispatch) => {
     dispatch(getChartDataLoading());
-
+    const url = isAdmin ? 'chart-admin' : 'chart-student';
     try {
-        const { data } = await axiosInstance.get('/tickets/chart');
-        const datesEmpty = new Array(7).fill('rand');
-        const datesHalf = datesEmpty.reduce((acc, item, index) => {
-            return [
-                ...acc,
-                dayjs()
-                    .subtract(datesEmpty.length - index - 1, 'day')
-                    .format(config.dateFormatClientWithoutHours)
-            ];
-        }, []);
-        const tickets = datesHalf.reduce((acc, item) => {
-            return [
-                ...acc,
-                {
-                    name: item,
-                    value: data.tickets[item] ? data.tickets[item].length : 0
-                }
-            ];
-        }, []);
-        const accepted = datesHalf.reduce((acc, item) => {
-            return [
-                ...acc,
-                {
-                    name: item,
-                    value: data.accepted[item] ? data.accepted[item].length : 0
-                }
-            ];
-        }, []);
-        const rejected = datesHalf.reduce((acc, item) => {
-            return [
-                ...acc,
-                {
-                    name: item,
-                    value: data.rejected[item] ? data.rejected[item].length : 0
-                }
-            ];
-        }, []);
-        const chartData = {
-            tickets,
-            accepted,
-            rejected
-        };
-        console.log(chartData);
+        const { data } = await axiosInstance.get(`/tickets/${url}`);
+        const chartData = isAdmin ? responseHandlerAdmin(data) : responseHandlerStudent(data);
         dispatch(getChartDataSuccess(chartData));
     } catch (e) {
         const {
