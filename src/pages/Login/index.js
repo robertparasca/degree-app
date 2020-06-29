@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { Form, Input, Button, Alert } from 'antd';
 import { GoogleLogin } from 'react-google-login';
 
+import Logo from '../../assets/images/logo.png';
 import CustomGoogleLogin from 'app-components/CustomGoogleLogin';
 import { login, googleLogin } from 'app-reducers/Auth';
 import config from 'app-utils/config';
@@ -39,7 +40,10 @@ const Login = () => {
 
     return (
         <section id='login-container'>
-            <Form {...layout} name='basic' initialValues={fake} onFinish={onFinish} onFinishFailed={onFinishFailed}>
+            <div id='logo'>
+                <img src={Logo} alt='logo' />
+            </div>
+            <Form name='login-form' initialValues={fake} onFinish={onFinish} onFinishFailed={onFinishFailed}>
                 <Form.Item
                     label='Email'
                     name='email'
@@ -56,7 +60,7 @@ const Login = () => {
                     <Input.Password />
                 </Form.Item>
 
-                <Form.Item {...tailLayout}>
+                <Form.Item className='login-btn'>
                     <Button type='primary' htmlType='submit'>
                         Login
                     </Button>

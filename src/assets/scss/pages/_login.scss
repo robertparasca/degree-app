@@ -5,6 +5,44 @@
     top: calc((100vh - 400px) / 2);
     height: 400px;
 
+    #login-form,
+    #activate-account-form {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        .ant-row.ant-form-item {
+            width: 500px;
+            label {
+                width: 130px;
+            }
+        }
+    }
+
+    #login-form {
+        .ant-row.ant-form-item {
+            label {
+                width: 70px;
+            }
+        }
+    }
+
+    .login-btn {
+        .ant-form-item-control-input-content {
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    #logo {
+        display: flex;
+        justify-content: center;
+        margin-bottom: $defaultSpacing;
+        img {
+            width: 100px;
+        }
+    }
+
     .login-errors {
         width: 200px;
         margin: 0 auto;

@@ -4,6 +4,7 @@ import { Alert, Button, Form, Input } from 'antd';
 
 import { activateAccount } from 'app-reducers/ActivateAccount';
 import Spinner from 'app-components/Spinner';
+import Logo from '../../assets/images/logo.png';
 
 const layout = {
     labelCol: { span: 8 },
@@ -38,14 +39,10 @@ const ActivateAccount = () => {
 
     return (
         <section id='login-container'>
-            <Form
-                form={formRef}
-                id='activate-account-form'
-                name='basic'
-                initialValues={{}}
-                onFinish={onFinish}
-                {...layout}
-            >
+            <div id='logo'>
+                <img src={Logo} alt='logo' />
+            </div>
+            <Form form={formRef} name='activate-account-form' initialValues={{}} onFinish={onFinish}>
                 <Form.Item
                     label='Parola'
                     name='password'
@@ -70,7 +67,7 @@ const ActivateAccount = () => {
                 >
                     <Input.Password />
                 </Form.Item>
-                <Form.Item {...tailLayout}>
+                <Form.Item className='login-btn'>
                     <Button type='primary' htmlType='submit'>
                         Activează
                     </Button>
