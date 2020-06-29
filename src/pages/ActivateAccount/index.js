@@ -6,15 +6,6 @@ import { activateAccount } from 'app-reducers/ActivateAccount';
 import Spinner from 'app-components/Spinner';
 import Logo from '../../assets/images/logo.png';
 
-const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 8 }
-};
-
-const tailLayout = {
-    wrapperCol: { offset: 10, span: 16 }
-};
-
 const ActivateAccount = () => {
     const dispatch = useDispatch();
     const [formRef] = Form.useForm();
