@@ -1,16 +1,7 @@
-import dayjs from 'dayjs';
-import config from 'app-utils/config';
+import { getDatesHalf } from 'app-reducers/Dashboard/helpers';
 
 export const responseHandlerAdmin = (data) => {
-    const datesEmpty = new Array(7).fill('rand');
-    const datesHalf = datesEmpty.reduce((acc, item, index) => {
-        return [
-            ...acc,
-            dayjs()
-                .subtract(datesEmpty.length - index - 1, 'day')
-                .format(config.dateFormatClientWithoutHours)
-        ];
-    }, []);
+    const datesHalf = getDatesHalf();
     const tickets = datesHalf.reduce((acc, item) => {
         return [
             ...acc,

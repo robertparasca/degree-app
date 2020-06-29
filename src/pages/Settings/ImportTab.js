@@ -39,7 +39,7 @@ const ImportTab = () => {
     if (importInfo.scholarshipImports) {
         importScholarshipsInfo = (
             <p>
-                Data ultimului import de studenți:{' '}
+                Data ultimului import al situației burselor:{' '}
                 <strong>{dayjs(importInfo.scholarshipImports.created_at).format(config.dateFormatClient)}</strong>
             </p>
         );

@@ -45,10 +45,7 @@ export const getChartData = (isAdmin) => async (dispatch) => {
         const chartData = isAdmin ? responseHandlerAdmin(data) : responseHandlerStudent(data);
         dispatch(getChartDataSuccess(chartData));
     } catch (e) {
-        const {
-            data: { errors }
-        } = e.response;
-        dispatch(getChartDataFail(errors));
+        dispatch(getChartDataFail(e));
     }
 };
 export default dashboardSlice.reducer;

@@ -58,6 +58,7 @@ export const importStudentsAsync = ({ file, year }) => async (dispatch) => {
     try {
         const data = await axiosInstance.post('/students/import', requestData);
         dispatch(importStudentsSuccess(data));
+        dispatch(getImportInfoAsync());
     } catch (e) {
         dispatch(importStudentsFail(e.response));
     }

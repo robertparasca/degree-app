@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import axiosInstance from '../../../utils/axios';
+import { push } from 'connected-react-router';
 
 const initialState = {
     loading: false,
@@ -14,7 +15,7 @@ const activateAccountSlice = createSlice({
         activateAccountLoading(state) {
             state.loading = true;
         },
-        activateAccountSuccess(state, { payload }) {
+        activateAccountSuccess(state) {
             state.loading = false;
         },
         activateAccountFail(state, { payload }) {
@@ -38,6 +39,7 @@ export const activateAccount = (values) => async (dispatch) => {
     try {
         const { data } = await axiosInstance.post('/activate-account', values);
         dispatch(activateAccountSuccess(data));
+        dispatch(push('/'));
     } catch (e) {
         const {
             data: { errors }

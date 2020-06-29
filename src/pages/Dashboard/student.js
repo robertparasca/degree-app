@@ -22,15 +22,19 @@ const StudentDashboard = () => {
             <section className='charts'>
                 <section className='chart-full'>
                     <h3>Toate cererile tale</h3>
-                    <ResponsiveContainer height={300} width='100%'>
-                        <LineChart data={chartData.tickets} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-                            <Line type='monotone' dataKey='value' stroke='#8884d8' />
-                            <CartesianGrid stroke='#ccc' strokeDasharray='5 5' />
-                            <XAxis dataKey='name' />
-                            <YAxis />
-                            <Tooltip />
-                        </LineChart>
-                    </ResponsiveContainer>
+                    {chartData && chartData.tickets && chartData.tickets.length ? (
+                        <ResponsiveContainer height={300} width='100%'>
+                            <LineChart data={chartData.tickets} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+                                <Line type='monotone' dataKey='value' stroke='#8884d8' />
+                                <CartesianGrid stroke='#ccc' strokeDasharray='5 5' />
+                                <XAxis dataKey='name' />
+                                <YAxis />
+                                <Tooltip />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    ) : (
+                        <p>Nu ai depus nicio cerere până acum.</p>
+                    )}
                 </section>
             </section>
         </>

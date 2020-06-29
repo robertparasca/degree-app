@@ -6,8 +6,8 @@ import { activateAccount } from 'app-reducers/ActivateAccount';
 import Spinner from 'app-components/Spinner';
 
 const layout = {
-    labelCol: { span: 4 },
-    wrapperCol: { span: 16 }
+    labelCol: { span: 8 },
+    wrapperCol: { span: 8 }
 };
 
 const tailLayout = {
@@ -37,7 +37,7 @@ const ActivateAccount = () => {
     }
 
     return (
-        <section>
+        <section id='login-container'>
             <Form
                 form={formRef}
                 id='activate-account-form'
@@ -56,17 +56,29 @@ const ActivateAccount = () => {
                 <Form.Item
                     label='Confirma parola'
                     name='password_confirmation'
-                    rules={[{ required: true, message: 'Te rog introdu o parola.' }]}
+                    rules={[
+                        { required: true, message: 'Te rog introdu o parola.' },
+                        ({ getFieldValue }) => ({
+                            validator(rule, value) {
+                                if (!value || getFieldValue('password') === value) {
+                                    return Promise.resolve();
+                                }
+                                return Promise.reject('Parolele nu sunt identice!');
+                            }
+                        })
+                    ]}
                 >
                     <Input.Password />
                 </Form.Item>
                 <Form.Item {...tailLayout}>
                     <Button type='primary' htmlType='submit'>
-                        Setup
+                        Activează
                     </Button>
                 </Form.Item>
             </Form>
-            {/*{errors ? <Alert message={errors} type='error' className='login-errors' /> : null}*/}
+            {errors ? (
+                <Alert message='A apărut o eroare. Te rog încearcă din nou.' type='error' className='login-errors' />
+            ) : null}
         </section>
     );
 };
