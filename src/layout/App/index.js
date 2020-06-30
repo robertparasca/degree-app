@@ -13,6 +13,13 @@ import { setToken } from 'app-utils/axios';
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
+const locations = [
+    {
+        name: 'Login',
+        pathname: '/'
+    }
+];
+
 const App = () => {
     const { user } = useSelector((state) => state.authSlice);
     const dispatch = useDispatch();
@@ -20,11 +27,18 @@ const App = () => {
     const { location } = useSelector((state) => state.router);
 
     useEffect(() => {
-        const currentPage = menuItems.find((item) => item.path === location.pathname);
+        const currentPage = menuItems.find((item) => location.pathname.includes(item.path));
 
         if (currentPage) {
             document.title = currentPage.name;
+            return;
         }
+
+        const found = locations.find((item) => (item.pathname = location.pathname));
+        if (found) {
+            document.title = found.name;
+        }
+
         return () => {
             document.title = 'Initial';
         };

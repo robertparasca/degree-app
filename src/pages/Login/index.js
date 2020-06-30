@@ -22,8 +22,8 @@ const Login = () => {
     const onFinishFailed = () => {};
 
     const fake = {
-        email: 'staff@gmail.com',
-        password: 'asd123'
+        email: '',
+        password: ''
     };
 
     return (
@@ -37,7 +37,7 @@ const Login = () => {
                     name='email'
                     rules={[{ required: true, message: 'Te rog introdu adresa de email.' }]}
                 >
-                    <Input type='email' />
+                    <Input type='email' placeholder='Email' />
                 </Form.Item>
 
                 <Form.Item
@@ -45,7 +45,7 @@ const Login = () => {
                     name='password'
                     rules={[{ required: true, message: 'Te rog introdu adresa de parola.' }]}
                 >
-                    <Input.Password />
+                    <Input.Password placeholder='Parola' />
                 </Form.Item>
 
                 <Form.Item className='login-btn'>

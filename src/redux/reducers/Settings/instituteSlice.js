@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import axiosInstance from '../../../utils/axios';
+import dayjs from 'dayjs';
 
 const initialState = {
     institute: null,
@@ -30,22 +31,18 @@ export const { fetchInstituteFail, fetchInstituteSuccess, fetchInstituteLoading,
 export const fetchInstitute = () => async (dispatch) => {
     dispatch(fetchInstituteLoading());
 
-    setTimeout(() => {
-        const data = {
-            university_name: 'Universitatea Tehnica Gheorghe Asachi',
-            faculty_name: 'Facultatea de Automatica si Calculatoare',
-            dean_name: 'Popescu Ion',
-            secretary_name: 'Popescu Dan',
-            active_year: '2019/2020'
+    try {
+        const { data } = await axiosInstance.get('/institute');
+        const institute = {
+            ...data,
+            start_date: dayjs(data.start_date),
+            mid_date: dayjs(data.mid_date),
+            end_date: dayjs(data.end_date)
         };
-        dispatch(fetchInstituteSuccess(data));
-    }, 1000);
-    // try {
-    //     const data = await axiosInstance.get('/posts');
-    //     dispatch(fetchInstituteSuccess(data));
-    // } catch (e) {
-    //     dispatch(fetchInstituteFail(e.response));
-    // }
+        dispatch(fetchInstituteSuccess(institute));
+    } catch (e) {
+        dispatch(fetchInstituteFail(e.response));
+    }
 };
 
 export default instituteSlice.reducer;

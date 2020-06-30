@@ -1,18 +1,26 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from 'antd';
 
 import StudentsImport from 'app-components/StudentsImport';
-import { importStudentsAsync, getImportInfoAsync, clearState } from 'app-reducers/Settings/importStudentsDataSlice';
+import {
+    importStudentsAsync,
+    getImportInfoAsync,
+    clearState,
+    importScholarshipAsync
+} from 'app-reducers/Settings/importStudentsDataSlice';
 import Spinner from 'app-components/Spinner';
 import dayjs from 'dayjs';
 import config from 'app-utils/config';
+import ScholarshipImport from 'app-components/ScholarshipImport';
 
 const ImportTab = () => {
     const dispatch = useDispatch();
     const { loading, importInfo } = useSelector((state) => state.settingsSlice.importStudentsDataSlice);
     const customOnDrop = (acceptedFiles, chosenYear) => {
         dispatch(importStudentsAsync({ file: acceptedFiles[0], year: chosenYear }));
+    };
+    const scholarshipOnDrop = (acceptedFiles) => {
+        dispatch(importScholarshipAsync({ file: acceptedFiles[0] }));
     };
 
     useEffect(() => {
@@ -51,7 +59,7 @@ const ImportTab = () => {
             <StudentsImport customOnDrop={customOnDrop} />
             {importStudentsInfo}
             <h3>Import burse</h3>
-            <Button type='primary'>Import situație burse</Button>
+            <ScholarshipImport customOnDrop={scholarshipOnDrop} disabled={!importInfo.studentImports} />
             {importScholarshipsInfo}
         </section>
     );

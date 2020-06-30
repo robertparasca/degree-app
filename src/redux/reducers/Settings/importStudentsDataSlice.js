@@ -8,7 +8,8 @@ const initialState = {
     importInfo: {
         studentImports: null,
         scholarshipImports: null
-    }
+    },
+    importScholarship: null
 };
 
 const importStudentsDataSlice = createSlice({
@@ -36,6 +37,15 @@ const importStudentsDataSlice = createSlice({
         getImportInfoFail(state) {
             state.loading = false;
         },
+        importScholarship(state) {
+            state.loading = true;
+        },
+        importScholarshipSuccess(state) {
+            state.loading = false;
+        },
+        importScholarshipFail(state) {
+            state.loading = false;
+        },
         clearState: () => initialState
     }
 });
@@ -47,6 +57,9 @@ export const {
     getImportInfo,
     getImportInfoFail,
     getImportInfoSuccess,
+    importScholarship,
+    importScholarshipFail,
+    importScholarshipSuccess,
     clearState
 } = importStudentsDataSlice.actions;
 
@@ -71,6 +84,19 @@ export const getImportInfoAsync = () => async (dispatch) => {
         dispatch(getImportInfoSuccess(data));
     } catch (e) {
         dispatch(getImportInfoFail(e.response));
+    }
+};
+
+export const importScholarshipAsync = ({ file }) => async (dispatch) => {
+    dispatch(importScholarship());
+    const requestData = new FormData();
+    requestData.append('file', file, file.name);
+    try {
+        const data = await axiosInstance.post('/scholarships/import', requestData);
+        dispatch(importScholarshipSuccess(data));
+        dispatch(getImportInfoAsync());
+    } catch (e) {
+        dispatch(importScholarshipFail(e.response));
     }
 };
 

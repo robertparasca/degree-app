@@ -11,7 +11,7 @@ const layout = {
     wrapperCol: { span: 18 }
 };
 
-const InstituteDetails = (props) => {
+const InstituteDetails = () => {
     const dispatch = useDispatch();
     const { institute, loading } = useSelector((state) => state.settingsSlice.instituteSlice);
 
@@ -23,9 +23,11 @@ const InstituteDetails = (props) => {
 
     const onFinish = () => {};
     const onFinishFailed = () => {};
+
     if (loading) {
         return <Spinner />;
     }
+
     return (
         <section>
             <h3>Detalii despre unitatea de învățământ</h3>
@@ -40,41 +42,41 @@ const InstituteDetails = (props) => {
                 <Form.Item
                     label='Dată start semestrul I'
                     name='start_date'
-                    rules={[{ required: true, message: 'Te rog introdu adresa de email.' }]}
+                    rules={[{ required: true, message: 'Te rog introdu data începerii anului universitar.' }]}
                 >
                     <DatePicker format={config.dateFormatClientWithoutHours} />
                 </Form.Item>
                 <Form.Item
                     label='Dată start semestrul al II-lea'
                     name='mid_date'
-                    rules={[{ required: true, message: 'Te rog introdu adresa de email.' }]}
+                    rules={[{ required: true, message: 'Te rog introdu data la care începe al doilea semestru.' }]}
                 >
                     <DatePicker format={config.dateFormatClientWithoutHours} />
                 </Form.Item>
                 <Form.Item
                     label='Sfârșit an universitar'
                     name='end_date'
-                    rules={[{ required: true, message: 'Te rog introdu adresa de email.' }]}
+                    rules={[{ required: true, message: 'Te rog introdu data încheierii anului universitar.' }]}
                 >
                     <DatePicker format={config.dateFormatClientWithoutHours} />
                 </Form.Item>
                 <Form.Item
                     label='Decan'
                     name='dean_name'
-                    rules={[{ required: true, message: 'Te rog introdu adresa de email.' }]}
+                    rules={[{ required: true, message: 'Te rog introdu numele decanului.' }]}
                 >
                     <Input />
                 </Form.Item>
                 <Form.Item
                     label='Secretar'
                     name='secretary_name'
-                    rules={[{ required: true, message: 'Te rog introdu adresa de email.' }]}
+                    rules={[{ required: true, message: 'Te rog introdu numele secretarului șef.' }]}
                 >
                     <Input />
                 </Form.Item>
                 <Form.Item>
                     <Button type='primary' htmlType='submit'>
-                        Login
+                        Salvează
                     </Button>
                 </Form.Item>
             </Form>
