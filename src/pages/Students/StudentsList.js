@@ -25,20 +25,26 @@ const StudentsList = () => {
             dataIndex: 'name',
             key: 'name',
             render: (text, record) => (
-                <Link to={`/studenti/vizualizare/${record.id}`}>
-                    {record.student.last_name} {record.student.first_name}
+                <Link to={`/studenti/vizualizare/${record.user_id}`}>
+                    {record.last_name} {record.first_name}
                 </Link>
             )
         },
         {
+            title: 'Grupă',
+            dataIndex: 'group',
+            key: 'group'
+        },
+        {
             title: 'Email',
             dataIndex: 'email',
-            key: 'email'
+            key: 'email',
+            render: (text, record) => record.user.email
         },
         {
             title: 'Delete',
             key: 'delete',
-            render: (text, record) => <DeleteButton record={record} removeFunction={removeStudent} />
+            render: (text, record) => <DeleteButton record={record} prop='user' removeFunction={removeStudent} />
         }
     ];
 

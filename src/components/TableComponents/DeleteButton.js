@@ -15,7 +15,7 @@ const getDisabledText = (page) => {
     }
 };
 
-const DeleteButton = ({ record, removeFunction, disabled }) => {
+const DeleteButton = ({ record, removeFunction, disabled, prop }) => {
     const { user } = useSelector((state) => state.authSlice);
     const { location } = useSelector((state) => state.router);
 
@@ -23,7 +23,9 @@ const DeleteButton = ({ record, removeFunction, disabled }) => {
 
     const staffPage = location.pathname.includes('staff');
 
-    if (staffPage && user.id === record.id) {
+    const id = prop ? record[prop].id : record.id;
+
+    if (staffPage && user.id === id) {
         return (
             <Popover content={contentText}>
                 <Button type='primary' danger disabled>
@@ -47,7 +49,7 @@ const DeleteButton = ({ record, removeFunction, disabled }) => {
         <Popconfirm
             title='Esti sigur? Aceasta actiune este ireversibila!'
             icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
-            onConfirm={() => removeFunction(record.id)}
+            onConfirm={() => removeFunction(id)}
         >
             <Button type='primary' danger>
                 <DeleteOutlined />

@@ -2,13 +2,33 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { push } from 'connected-react-router';
-import { PageHeader, Descriptions, Table, Tabs } from 'antd';
+import { PageHeader, Descriptions, Tabs } from 'antd';
 
 import Spinner from 'app-components/Spinner';
 import { fetchStudent, clearState } from 'app-reducers/Students/studentView';
 import StudentTicketsList from 'app-pages/Students/StudentTicketsList';
 
 const { TabPane } = Tabs;
+
+const cycleOfStudy = (cycleOfStudy) => {
+    switch (cycleOfStudy) {
+        case 1:
+        default:
+            return 'Licență';
+        case 2:
+            return 'Master';
+        case 3:
+            return 'Doctorat';
+    }
+};
+
+const getLanguage = (lang) => {
+    return lang === 0 ? 'Română' : 'Engleză';
+};
+
+const getEducationForm = (educationForm) => {
+    return educationForm === 0 ? 'Cu frecvență' : 'Fără frecvență';
+};
 
 const StudentView = () => {
     const { id } = useParams();
@@ -39,7 +59,10 @@ const StudentView = () => {
                             {student.student.field_of_study}
                         </Descriptions.Item>
                         <Descriptions.Item label='Programul de studii'>
-                            {student.student.program_of_study}
+                            {student.student.program_of_study || '-'}
+                        </Descriptions.Item>
+                        <Descriptions.Item label='Ciclu de studii'>
+                            {cycleOfStudy(student.student.cycle_of_study)}
                         </Descriptions.Item>
                         <Descriptions.Item label='Număr matricol'>
                             {student.student.unique_registration_number}
@@ -48,6 +71,20 @@ const StudentView = () => {
                         <Descriptions.Item label='Grupa'>{student.student.group}</Descriptions.Item>
                         <Descriptions.Item label='Finantare'>
                             {student.student.is_paying_tax ? 'Taxă' : 'Buget'}
+                        </Descriptions.Item>
+                        <Descriptions.Item label='Bursă'>
+                            {student.student.scholarship
+                                ? `Bursă de ${student.student.scholarship.type} în valoare de ${student.student.scholarship.amount} lei/lună`
+                                : 'Nu beneficiază de bursă'}
+                        </Descriptions.Item>
+                        <Descriptions.Item label='An admitere'>{student.student.admission_year}</Descriptions.Item>
+                        <Descriptions.Item label='An înmatriculare'>{student.student.start_year}</Descriptions.Item>
+                        <Descriptions.Item label='Medie admitere'>{student.student.admission_grade}</Descriptions.Item>
+                        <Descriptions.Item label='Limbă studii'>
+                            {getLanguage(student.student.language)}
+                        </Descriptions.Item>
+                        <Descriptions.Item label='Formă învățământ'>
+                            {getEducationForm(student.student.is_ID)}
                         </Descriptions.Item>
                     </Descriptions>
                 </TabPane>
