@@ -1,4 +1,7 @@
 $defaultSpacing: 16px;
+$fontSize: 16px;
+$primaryColor: #00ff00;
+$secondaryColor: darken($primaryColor, 10);
 
 @import 'layout/index';
 @import 'pages/index';

@@ -4,8 +4,10 @@ import { LoadingOutlined } from '@ant-design/icons';
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
-const Spinner = () => {
-    return <Spin indicator={antIcon} />;
-};
+class Spinner extends React.Component {
+    render() {
+        return <Spin indicator={antIcon} />;
+    }
+}
 
 export default Spinner;
