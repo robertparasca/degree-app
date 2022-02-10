@@ -12,7 +12,7 @@
     "connected-react-router": "^6.8.0",
     "dayjs": "^1.8.24",
     "history": "^4.10.1",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "prettier": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
